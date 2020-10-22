@@ -1,14 +1,6 @@
-export function makeSearch(name = null, ingredient = null) {
-  return [
-    {
-      id: 1,
-      name: "Mojito",
-      previewURL: "https://www.thecocktaildb.com/images/media/drink/rrtssw1472668972.jpg/preview"
-    },
-    {
-      id: 2,
-      name: "Tequila Sunrise",
-      previewURL: "https://www.thecocktaildb.com/images/media/drink/rrtssw1472668972.jpg/preview"
-    }
-  ]
+import { searchByName } from './api'
+
+export function makeSearch(query) {
+  const cockatailName = query;
+  return searchByName(cockatailName)
 }
