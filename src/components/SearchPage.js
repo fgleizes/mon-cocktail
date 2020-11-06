@@ -8,20 +8,37 @@ export default class SearchPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = { results: [] }
-
     this.handleSearch = this.handleSearch.bind(this)
   }
 
-  async handleSearch(query) {
-    // makeSearch(query)
-    //   .then((results) => {
-    //     this.setState({ result: results })
-    //   })
+  componentDidMount() {
+    this.updateResultsFromURL();
+  }
 
-    // const queryResult = await makeSearch(query);
-    // this.setState({ results: queryResult })
+  componentDidUpdate(prevProps) {
+    if (prevProps.location !== this.props.location) {
+      // changed location; redo the search
+      this.updateResultsFromURL();
+    }
+  }
 
-    const newURL = "/search/" + query;
+  async updateResultsFromURL() {
+    // get parameters from URL
+    const query = this.props.match.params.query;
+
+    // update results using these parameters
+    const queryResult = await makeSearch(query);
+    this.setState({ results: queryResult })
+  }
+
+
+  buildSearchURL(query) {
+    return "/search/" + query;
+  }
+
+  handleSearch(query) {
+    // only update update URL
+    const newURL = this.buildSearchURL(query);
     this.props.history.push(newURL);
   }
 
