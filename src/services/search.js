@@ -1,6 +1,13 @@
-import { searchByName } from './api'
+import { searchCocktailsByName, searchCocktailDetailsById } from './api'
 
 export function makeSearch(query) {
-  const cockatailName = query;
-  return searchByName(cockatailName)
+
+  if(typeof query === "string"){
+    const cocktailName = query;
+    return searchCocktailsByName(cocktailName)
+  }
+  if(typeof query === "number"){
+    const cocktailId = query;
+    return searchCocktailDetailsById(cocktailId)
+  }
 }
