@@ -43,27 +43,23 @@ export function searchCocktailDetailsById(id) {
 
     return axios.get(URL)
         .then(function (response) {
-            // handle success
-            // console.log(response.data)
             const drinkDetails = response.data.drinks[0]
-
-            console.log(drinkDetails)
-            // return drinkDetails
+            return drinkDetails
         })
         // .then((drinks) => {
-
         //     const results = drinks.map((drink) => {
         //         const { idDrink, strDrink, strDrinkThumb } = drink;
         //         return {
         //             id: idDrink,
         //             name: strDrink,
-        //             previewURL: strDrinkThumb + '/preview'
+        //             previewURL: strDrinkThumb,
         //         }
         //     })
 
         //     return results
         // })
-        // .catch((error) => {
-        //     return []
-        // })
+        .catch((error) => {
+            // console.log("error " + error)
+            return
+        })
 }
