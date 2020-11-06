@@ -1,13 +1,23 @@
 import React from 'react'
+import { Link } from "react-router-dom";
+import Figure from 'react-bootstrap/Figure';
 
-export default class CocktailCard extends React.Component {
+export default function CocktailCard(props) {
 
-  render() {
-
-    return (
-      <div className="cocktail">
-        <img src={this.props.cocktail.previewURL} alt={"Cocktail " + this.props.cocktail.name} title={"Cocktail " + this.props.cocktail.name} />
-      </div>
-    );
-  }
+  return (
+    <Link to={`/cocktail/${props.cocktail.id}-${props.cocktail.name.replace(/ /g, "-")}`}>
+      <Figure className="cocktail w-100 mb-0">
+        <Figure.Image
+          width="100%"
+          rounded
+          src={props.cocktail.previewURL} 
+          alt={"Photo d'un cocktail " + props.cocktail.name} 
+          title={props.cocktail.name}
+        />
+        <Figure.Caption>
+          {props.cocktail.name}
+        </Figure.Caption>
+      </Figure>
+    </Link>
+  );
 }
