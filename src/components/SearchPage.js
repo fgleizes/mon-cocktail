@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBox from './SearchBox'
 import DisplayCocktailList from './DisplayCocktailList';
+
 import { makeSearch } from '../services/search'
 
 export default class SearchPage extends React.Component {
@@ -17,8 +18,11 @@ export default class SearchPage extends React.Component {
     //     this.setState({ result: results })
     //   })
 
-    const queryResult = await makeSearch(query);
-    this.setState({ results: queryResult })
+    // const queryResult = await makeSearch(query);
+    // this.setState({ results: queryResult })
+
+    const newURL = "/search/" + query;
+    this.props.history.push(newURL);
   }
 
   render() {
