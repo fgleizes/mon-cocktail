@@ -1,12 +1,12 @@
 import React from 'react';
 import SearchBox from './SearchBox'
+import DisplayCocktailList from './DisplayCocktailList';
 import { makeSearch } from '../services/search'
-import DisplayResult from './DisplayResult';
 
 export default class SearchPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { result: [] }
+    this.state = { results: [] }
 
     this.handleSearch = this.handleSearch.bind(this)
   }
@@ -17,19 +17,17 @@ export default class SearchPage extends React.Component {
     //     this.setState({ result: results })
     //   })
 
-    const results = await makeSearch(query);
-    this.setState({ result: results })
+    const queryResult = await makeSearch(query);
+    this.setState({ results: queryResult })
   }
 
   render() {
     return (
-      <div>
-        <SearchBox handleSearch={this.handleSearch} />
-        <p>nombre de drinks: {this.state.result.length}</p>
+      <section id="search-page">
+        <SearchBox handleSearch={this.handleSearch} numberOfResults={this.state.results.length} />
 
-        <DisplayResult result={this.state.result} />
-      </div>
-
+        {this.state.results.length > 0 && <DisplayCocktailList results={this.state.results} />}
+      </section>
     );
   }
 }

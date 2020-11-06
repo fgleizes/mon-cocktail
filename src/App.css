@@ -11,7 +11,7 @@
   justify-content: center;
 }
 
-.list-cocktails {
+.cocktail-list {
   display: grid;
   grid-gap: 1.5rem;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
