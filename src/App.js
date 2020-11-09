@@ -5,7 +5,8 @@ import CocktailView from './components/CocktailView';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 
 import './App.css';
@@ -18,9 +19,13 @@ function App() {
 
       <Router>
         <Switch>
-          <Route exact path="/" children={<SearchPage />} />
-          {/* <Route path="/cocktail/:id" children={<CocktailView />} /> */}
+          <Route path="/search/:query?" component={SearchPage} />
           <Route path="/cocktail/:id-:name" children={<CocktailView />} />
+
+          {/* Default route */}
+          <Route path="/">
+            <Redirect to="/search/" />
+          </Route>
         </Switch>
       </Router>
 

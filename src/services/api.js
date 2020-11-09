@@ -4,7 +4,7 @@ const API_URL = "https://www.thecocktaildb.com/api/json/v1/1/";
 
 export function searchCocktailsByName(name) {
     const URL = API_URL + "search.php?s=" + name
-    
+
     return axios.get(URL)
         .then(function (response) {
             // handle success
@@ -20,16 +20,6 @@ export function searchCocktailsByName(name) {
                     previewURL: strDrinkThumb + '/preview'
                 }
             })
-
-            // const results = []
-            // for (let i = 0; i < drinks.length; i++) {
-            //     const { idDrink, strDrink, strDrinkThumb } = drinks[i];
-            //     results.push({
-            //         id: idDrink,
-            //         name: strDrink,
-            //         previewURL: strDrinkThumb + '/preview'
-            //     })
-            // }
 
             return results
         })

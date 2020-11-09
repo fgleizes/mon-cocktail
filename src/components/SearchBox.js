@@ -9,23 +9,17 @@ import InputGroup from 'react-bootstrap/InputGroup';
 export default class SearchBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       query: '',
       filters: ''
     }
 
     this.onSubmit = this.onSubmit.bind(this)
-    this.onChange = this.onChange.bind(this)
   }
-  
+
   onSubmit(event) {
     event.preventDefault();
     this.props.handleSearch(this.state.query)
-  }
-
-  onChange(event) {
-    this.setState({ query: event.target.value })
-    this.props.handleSearch(event.target.value)
   }
 
   render() {
@@ -41,8 +35,7 @@ export default class SearchBox extends React.Component {
                     type="text"
                     placeholder="Saisissez le nom d'un cocktail"
                     value={this.state.query}
-                    // onChange={(event) => this.setState({ query: event.target.value })}
-                    onChange={this.onChange}
+                    onChange={(event) => this.setState({ query: event.target.value })}
                   />
 
                   <InputGroup.Append>
