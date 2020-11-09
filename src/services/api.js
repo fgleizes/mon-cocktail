@@ -12,6 +12,15 @@ export function searchCocktailsByName(name) {
             return drinks
         })
         .then((drinks) => {
+            const results = drinks.map((drink) => {
+                const { idDrink, strDrink, strDrinkThumb } = drink;
+                return {
+                    id: idDrink,
+                    name: strDrink,
+                    previewURL: strDrinkThumb + '/preview'
+                }
+            })
+
             // const results = []
             // for (let i = 0; i < drinks.length; i++) {
             //     const { idDrink, strDrink, strDrinkThumb } = drinks[i];
@@ -21,15 +30,6 @@ export function searchCocktailsByName(name) {
             //         previewURL: strDrinkThumb + '/preview'
             //     })
             // }
-
-            const results = drinks.map((drink) => {
-                const { idDrink, strDrink, strDrinkThumb } = drink;
-                return {
-                    id: idDrink,
-                    name: strDrink,
-                    previewURL: strDrinkThumb + '/preview'
-                }
-            })
 
             return results
         })
@@ -46,20 +46,33 @@ export function searchCocktailDetailsById(id) {
             const drinkDetails = response.data.drinks[0]
             return drinkDetails
         })
-        // .then((drinks) => {
-        //     const results = drinks.map((drink) => {
-        //         const { idDrink, strDrink, strDrinkThumb } = drink;
-        //         return {
-        //             id: idDrink,
-        //             name: strDrink,
-        //             previewURL: strDrinkThumb,
-        //         }
-        //     })
+        .then((drinkDetails) => {
+            const ingredients = [];
 
-        //     return results
-        // })
+            let i = 1
+            while (drinkDetails["strIngredient" + i] !== null) {
+                const strIngredient = drinkDetails["strIngredient" + i];
+                const strMeasure = drinkDetails["strMeasure" + i];
+                ingredients.push({ name: strIngredient, quantity: strMeasure })
+                i++
+            }
+
+
+            const result = {
+                id: drinkDetails.idDrink,
+                name: drinkDetails.strDrink,
+                imageURL: drinkDetails.strDrinkThumb,
+                tags: drinkDetails.strTags,
+                category: drinkDetails.strCategory,
+                alcoholic: drinkDetails.strAlcoholic,
+                glass: drinkDetails.strGlass,
+                instructions: drinkDetails.strInstructions,
+                ingredients: ingredients
+            }
+
+            return result
+        })
         .catch((error) => {
-            // console.log("error " + error)
             return
         })
 }
