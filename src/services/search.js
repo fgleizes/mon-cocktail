@@ -1,6 +1,6 @@
-import { searchByName } from './api'
+import { searchCocktailsByName } from './api'
 
 export function makeSearch(query) {
-  const cockatailName = query;
-  return searchByName(cockatailName)
+  const cocktailName = query;
+  return searchCocktailsByName(cocktailName)
 }
