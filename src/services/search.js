@@ -1,6 +1,6 @@
-import { searchByName } from './api'
+import { searchCocktail } from './api'
 
 export function makeSearch(query) {
   const cockatailName = query;
-  return searchByName(cockatailName)
+  return searchCocktail(cockatailName)
 }

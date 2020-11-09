@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = "https://www.thecocktaildb.com/api/json/v1/1/";
 
-export function searchByName(name) {
+export function searchCocktail(name) {
     const URL = API_URL + "search.php?s=" + name
     return axios.get(URL)
         .then(function (response) {
@@ -20,15 +20,6 @@ export function searchByName(name) {
                     previewURL: strDrinkThumb + '/preview'
                 })
             }
-
-            // const results = drinks.map((drink) => {
-            //     const { idDrink, strDrink, strDrinkThumb } = drink;
-            //     return {
-            //         id: idDrink,
-            //         name: strDrink,
-            //         previewURL: strDrinkThumb + '/preview'
-            //     }
-            // })
 
             return results
         })
