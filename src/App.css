@@ -7,6 +7,15 @@ body {
   background-color: goldenrod;
 }
 
+/* HEADER */
+.navbar .navbar-brand {
+  font-size: 1.75rem;
+}
+.navbar .recipes svg {
+  font-size: 1.5rem;
+}
+
+
 /* DISPLAY COCKTAIL LIST */
 .cocktail-list {
   display: grid;
