@@ -1,10 +1,15 @@
 import React from 'react';
+import { withRouter } from "react-router-dom";
+import { searchCocktailDetailsById } from '../services/api';
+
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Figure from 'react-bootstrap/Figure';
-import { withRouter } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import { searchCocktailDetailsById } from '../services/api';
+
+import { MdLibraryAdd } from 'react-icons/md';
+import { MdDeleteForever } from 'react-icons/md';
 
 
 class CocktailView extends React.Component {
@@ -30,41 +35,67 @@ class CocktailView extends React.Component {
   render(){
     const { name, imageURL, tags, alcoholic, category, glass, instructions, ingredients } = this.state.cocktailDetails
 
-    if (!this.state.cocktailDetails) return <Container><h3>Cocktail not found!</h3></Container>;
+    if (this.state.cocktailDetails === "error") return <Container><h3>Cocktail not found!</h3></Container>;
+
+    console.log(this.props)
     
     return (
       <Container>
-        <h1>{name}</h1>
+        <div className="cocktail-details py-3 py-lg-5">
+          {this.state.cocktailDetails &&
+            <Row>
+              <Col sm={{ span: 12 }} md={{ span: 6, order: 2 }} lg={5} xl={4}>
+                <Figure>
+                  <Figure.Image
+                    src={imageURL}
+                    alt={`Photo of a ${name} cocktail`}
+                    title={name}
+                  />
 
-        <Row>
-          <Col sm={{ span: 12}} md={{ span: 5, order: 2 }} xl={4}>
-            <Figure>
-              <Figure.Image
-                src={imageURL}
-                alt={`Photo of a ${name} cocktail`}
-                title={name}
-              />
-              <Figure.Caption>
-                {tags}
-              </Figure.Caption>
-            </Figure>
+                  {tags &&
+                    <Figure.Caption>
+                      {tags}
+                      {/* {tags ? tags.split(",").map((tag, index) => <a href="#" key={index}>{tag}</a>) : ""} */}
+                    </Figure.Caption>
+                  }
+                </Figure>
 
-            <ul className="m-0 py-3">
-              <li>{alcoholic}</li>
-              <li>Category: {category}</li>
-              <li>Glass: {glass}</li>
-            </ul>
-          </Col>
+                <Button variant="success" className="mb-4 mb-md-0">
+                  <MdLibraryAdd /> Add to My Cocktails
+                </Button>
 
-          <Col sm={{ span: 12}} md={{ span: 7, order: 1 }} xl={8}>
-            <p>{instructions}</p>
+                <Button variant="dark" className="mb-4 mb-md-0">
+                  <MdDeleteForever /> Remove from My Cocktails
+                </Button>
+              </Col>
 
-            <ul className="m-0 py-3">
-              {ingredients.map((ingredient, index) => <li key={index}>{ingredient.name + " " + (ingredient.quantity ? ingredient.quantity : "")}</li>)}
-            </ul>
-          </Col>
-        </Row>
+              <Col sm={{ span: 12 }} md={{ span: 6, order: 1 }} lg={7} xl={8} className="d-flex flex-column justify-content-between">
+                <div>
+                  <h2>{name}</h2>
+                  <p>{instructions}</p>
+                </div>
 
+                <div className="ingredient-list">
+                  <h3>Ingredients:</h3>
+                  {ingredients &&
+                    <ul>
+                      {ingredients.map((ingredient, index) => <li className="ingredient" key={index}>{ingredient.name + " " + (ingredient.quantity ? ingredient.quantity : "")}</li>)}
+                    </ul>
+                  }
+                </div>
+
+                <div>
+                  <h4>Details:</h4>
+                  <ul className="m-md-0">
+                    <li>{alcoholic}</li>
+                    <li>Category: {category}</li>
+                    <li>Glass: {glass}</li>
+                  </ul>
+                </div>
+              </Col>
+            </Row>
+          }
+        </div>
       </Container>
     );
   }

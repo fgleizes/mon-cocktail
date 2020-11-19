@@ -40,7 +40,7 @@ export function searchCocktailDetailsById(id) {
             const ingredients = [];
 
             let i = 1
-            while (drinkDetails["strIngredient" + i] !== null) {
+            while (drinkDetails["strIngredient" + i]) {
                 const strIngredient = drinkDetails["strIngredient" + i];
                 const strMeasure = drinkDetails["strMeasure" + i];
                 ingredients.push({ name: strIngredient, quantity: strMeasure })
@@ -63,6 +63,6 @@ export function searchCocktailDetailsById(id) {
             return result
         })
         .catch((error) => {
-            return
+            return "error"
         })
 }

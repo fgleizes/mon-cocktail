@@ -1,18 +1,65 @@
+body {
+  padding-top: 4.25rem;
+}
+
 .App {
-  min-height: 100vh;
+  min-height: calc(100vh - 4.25rem);
   background-color: goldenrod;
 }
 
+/* DISPLAY COCKTAIL LIST */
+.cocktail-list {
+  display: grid;
+  grid-gap: 2.5rem 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+/* COCKTAIL CARD */
 .cocktail figcaption {
-  height: 2rem;
-  color: white;
+  height: 2.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #343a40;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: color ease-in-out .15s;
+}
+.cocktail .hover-effect {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  transition: background ease-in-out .15s;
 }
 
-.cocktail-list {
+.cocktail img {
+  border-bottom-left-radius: 0!important;
+  border-bottom-right-radius: 0!important;
+}
+.cocktail-card button {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.cocktail-card:hover figcaption {
+  color: #ffffff;
+}
+.cocktail-card:hover .hover-effect {
+  background-color: rgba(0, 0, 0, .2);
+}
+
+
+/* COCKTAIL VIEW */
+.ingredient-list h4{
+  margin-bottom: 10px;
+}
+.ingredient-list ul{
   display: grid;
-  grid-gap: 1.5rem;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 5px 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+}
+.ingredient-list ul li{
+  line-height: 1.25;
 }

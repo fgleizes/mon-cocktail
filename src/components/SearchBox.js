@@ -1,10 +1,12 @@
 import React from 'react';
+
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import { GoSearch } from 'react-icons/go';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import InputGroup from 'react-bootstrap/InputGroup';
+
+import { GoSearch } from 'react-icons/go';
 
 export default class SearchBox extends React.Component {
   constructor(props) {
@@ -25,7 +27,8 @@ export default class SearchBox extends React.Component {
   render() {
     return (
       <Container>
-        <div className="text-center">
+        <div className="search-box text-center py-3 pb-md-5 pt-lg-4">
+          <h1 className="text-dark pb-4">Search cocktails</h1>
           <Form onSubmit={this.onSubmit}>
             <Form.Row>
               <Col lg={9} className="mx-auto">
@@ -33,7 +36,7 @@ export default class SearchBox extends React.Component {
                   <Form.Control
                     className="text-center"
                     type="text"
-                    placeholder="Saisissez le nom d'un cocktail"
+                    placeholder="Enter the name of a cocktail"
                     value={this.state.query}
                     onChange={(event) => this.setState({ query: event.target.value })}
                   />
