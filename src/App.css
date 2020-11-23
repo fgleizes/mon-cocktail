@@ -11,8 +11,21 @@ body {
 .navbar .navbar-brand {
   font-size: 1.75rem;
 }
-.navbar .recipes svg {
+.navbar .myCocktails-cart {
+  position: relative;
+}
+.navbar .myCocktails-cart svg {
   font-size: 1.5rem;
+}
+.navbar .myCocktails-cart span {
+  position: absolute;
+  bottom: 0px;
+  left: 123px;
+  font-size: 10px;
+  font-weight: 900;
+  padding: 0px 4px;
+  border: 1px solid;
+  border-radius: 100%;
 }
 
 

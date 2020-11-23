@@ -52,6 +52,7 @@ export function searchCocktailDetailsById(id) {
                 id: drinkDetails.idDrink,
                 name: drinkDetails.strDrink,
                 imageURL: drinkDetails.strDrinkThumb,
+                previewURL: drinkDetails.strDrinkThumb + '/preview',
                 tags: drinkDetails.strTags,
                 category: drinkDetails.strCategory,
                 alcoholic: drinkDetails.strAlcoholic,

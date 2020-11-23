@@ -8,7 +8,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import { MdLibraryBooks } from 'react-icons/md';
 
 
-export default function Header() {
+export default function Header(props) {
+  const myCocktails = props.myCocktails
+
   return (
     <header className="header">
       <Navbar bg="dark" variant="dark" fixed="top" expand="md">
@@ -26,8 +28,11 @@ export default function Header() {
             </NavDropdown> */}
           </Nav>
           <Nav>
-            <Nav.Link as={Link} to='/myCocktails/' className="recipes d-flex align-items-center">
-              My Cocktails<MdLibraryBooks className="ml-2"/>
+            <Nav.Link as={Link} to='/myCocktails/' className="myCocktails-cart d-flex align-items-center">
+              My Cocktails<MdLibraryBooks className="ml-2" /> 
+              {myCocktails.length > 0 && 
+                <span className="ml-md-2">{myCocktails.length}</span>
+              }
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 
 
 export default function DisplayCocktailList(props) {
-  const cocktails = props.results
+  const { cocktails, myCocktails, selectCocktail } = props
 
   return (
     <Container>
@@ -15,8 +15,10 @@ export default function DisplayCocktailList(props) {
         <div className="cocktail-list pt-3">  
           {cocktails.map((cocktail, index) => (
             <CocktailCard
-              cocktail={cocktail}
               key={index}
+              cocktail={cocktail}
+              myCocktails={myCocktails}
+              selectCocktail={selectCocktail}
             />
           ))}
         </div>

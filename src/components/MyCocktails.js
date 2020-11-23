@@ -5,19 +5,7 @@ import Container from 'react-bootstrap/Container';
 
 
 export default function MyCocktails(props) {
-  // const myCocktails = props.myCocktails
-  const myCocktails = [
-    {
-      id: "11000",
-      name: "Mojito",
-      previewURL: "https://www.thecocktaildb.com/images/media/drink/3z6xdi1589574603.jpg/preview"
-    },
-    {
-      id: "15841",
-      name: "Mojito #3",
-      previewURL: "https://www.thecocktaildb.com/images/media/drink/vwxrsw1478251483.jpg/preview"
-    }
-  ]
+  const { myCocktails, selectCocktail } = props
 
   return (
     <Container>
@@ -25,10 +13,12 @@ export default function MyCocktails(props) {
 
       <div id="cocktail-list pb-5">
         <div className="cocktail-list pt-3">  
-          {myCocktails.map((cocktail, index) => (
+          {myCocktails.map((myCocktail, index) => (
             <CocktailCard
-              cocktail={cocktail}
               key={index}
+              cocktail={myCocktail}
+              myCocktails={myCocktails}
+              selectCocktail={selectCocktail}
             />
           ))}
         </div>

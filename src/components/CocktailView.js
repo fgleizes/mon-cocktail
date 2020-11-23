@@ -1,22 +1,20 @@
 import React from 'react';
+import SelectButton from './SelectButton'
 import { withRouter } from "react-router-dom";
 import { searchCocktailDetailsById } from '../services/api';
 
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Figure from 'react-bootstrap/Figure';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
-import { MdLibraryAdd } from 'react-icons/md';
-import { MdDeleteForever } from 'react-icons/md';
+import { FaGlassMartiniAlt } from 'react-icons/fa';
 
 
 class CocktailView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // urlParams: this.props.match.params,
       cocktailDetails: ""
     }
   }
@@ -33,11 +31,11 @@ class CocktailView extends React.Component {
   }
   
   render(){
-    const { name, imageURL, tags, alcoholic, category, glass, instructions, ingredients } = this.state.cocktailDetails
+    const { id, name, imageURL, previewURL, tags, alcoholic, category, glass, instructions, ingredients } = this.state.cocktailDetails
+    const { myCocktails, selectCocktail } = this.props
+    const thisCocktail = { id, name, previewURL }
 
     if (this.state.cocktailDetails === "error") return <Container><h3>Cocktail not found!</h3></Container>;
-
-    console.log(this.props)
     
     return (
       <Container>
@@ -60,16 +58,16 @@ class CocktailView extends React.Component {
                   }
                 </Figure>
 
-                <Button variant="success" className="mb-4 mb-md-0">
-                  <MdLibraryAdd /> Add to My Cocktails
-                </Button>
-
-                <Button variant="dark" className="mb-4 mb-md-0">
-                  <MdDeleteForever /> Remove from My Cocktails
-                </Button>
+                <div className="mb-4 mb-md-0">
+                  <SelectButton
+                    thisCocktail={thisCocktail}
+                    myCocktails={myCocktails}
+                    selectCocktail={selectCocktail}
+                  />
+                </div>
               </Col>
 
-              <Col sm={{ span: 12 }} md={{ span: 6, order: 1 }} lg={7} xl={8} className="d-flex flex-column justify-content-between">
+              <Col sm={{ span: 12 }} md={{ span: 6, order: 1 }} lg={7} xl={8}>
                 <div>
                   <h2>{name}</h2>
                   <p>{instructions}</p>
@@ -87,9 +85,10 @@ class CocktailView extends React.Component {
                 <div>
                   <h4>Details:</h4>
                   <ul className="m-md-0">
+                    <li>{category}</li>
                     <li>{alcoholic}</li>
-                    <li>Category: {category}</li>
-                    <li>Glass: {glass}</li>
+                    <li>Glass type : {glass}</li>
+                    <li><FaGlassMartiniAlt /> : {glass}</li>
                   </ul>
                 </div>
               </Col>

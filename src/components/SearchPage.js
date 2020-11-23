@@ -43,11 +43,20 @@ export default class SearchPage extends React.Component {
   }
 
   render() {
+    const results = this.state.results
+    const { myCocktails, selectCocktail } = this.props
+
     return (
       <section id="search-page">
-        <SearchBox handleSearch={this.handleSearch} numberOfResults={this.state.results.length} />
+        <SearchBox handleSearch={this.handleSearch} numberOfResults={results.length} />
 
-        {this.state.results.length > 0 && <DisplayCocktailList results={this.state.results} />}
+        {results.length > 0 && 
+          <DisplayCocktailList 
+            cocktails={results}
+            myCocktails={myCocktails}
+            selectCocktail={selectCocktail}
+          />
+        }
       </section>
     );
   }
