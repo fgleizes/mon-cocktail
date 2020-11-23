@@ -8,10 +8,7 @@ import { MdDeleteForever } from 'react-icons/md';
 export default class SelectButton extends React.Component {
   constructor(props){
     super(props)
-    this.state = { 
-      isSelected: false,
-      showModal: false
-    }
+    this.state = { isSelected: false }
 
     this.handleSelectCocktail = this.handleSelectCocktail.bind(this)
   }
@@ -21,7 +18,7 @@ export default class SelectButton extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.myCocktails !== prevProps.myCocktails) {
+    if (this.props.myCocktails !== prevProps.myCocktails || this.props.thisCocktail !== prevProps.thisCocktail) {
       this.isSelected()
     }
   }
