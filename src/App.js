@@ -29,25 +29,17 @@ class App extends React.Component {
 
   selectCocktail(cocktail) {
     const myCocktails = this.state.myCocktails
+    const index = myCocktails.findIndex(myCocktail => myCocktail.id === cocktail.id)
 
-    // Si le cocktail sélectionné est déjà dans ma liste "myCocktails"
-    for (let index = 0; index < myCocktails.length; index++) {
-      if (cocktail.id === myCocktails[index].id) {
-        // on affiche le modal de confirmation de suppression du cocktail
-        return this.setState({ showModal: true, cocktailToRemove: {...cocktail, index} })
-      }
-    }
-
-    // Sinon le cocktail sélectionné n'est pas dans ma liste "myCocktails ", on le rajoute à la fin de la liste
-    return this.setState({ myCocktails: [...myCocktails, cocktail] })
+    index === -1 // Si le cocktail sélectionné n'est pas dans ma liste "myCocktails "
+      ? this.setState({ myCocktails: [...myCocktails, cocktail] }) // on le rajoute à la fin de la liste
+      : this.setState({ showModal: true, cocktailToRemove: { ...cocktail, index } }) // sinon on affiche le modal de confirmation 
   }
 
   removeCocktail() {
-    const cocktailToRemove = this.state.cocktailToRemove
     const myCocktails = [...this.state.myCocktails]
 
-    // Si l'utilisateur à validé le modal de confirmation, on supprime le cocktail de la liste
-    myCocktails.splice(cocktailToRemove.index, 1)
+    myCocktails.splice(this.state.cocktailToRemove.index, 1) // Supprime le cocktail de la liste
     return this.setState({ myCocktails: myCocktails, showModal: false, cocktailToRemove: "" })
   }
 
