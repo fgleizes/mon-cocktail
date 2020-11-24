@@ -8,8 +8,6 @@ import Row from 'react-bootstrap/Row';
 import Figure from 'react-bootstrap/Figure';
 import Container from 'react-bootstrap/Container';
 
-import { FaGlassMartiniAlt } from 'react-icons/fa';
-
 
 class CocktailView extends React.Component {
   constructor(props) {
@@ -38,64 +36,64 @@ class CocktailView extends React.Component {
     if (this.state.cocktailDetails === "error") return <Container><h3>Cocktail not found!</h3></Container>;
     
     return (
-      <Container>
-        <div className="cocktail-details py-3 py-lg-5">
-          {this.state.cocktailDetails &&
-            <Row>
-              <Col sm={{ span: 12 }} md={{ span: 6, order: 2 }} lg={5} xl={4}>
-                <Figure>
-                  <Figure.Image
-                    src={imageURL}
-                    alt={`Photo of a ${name} cocktail`}
-                    title={name}
-                  />
+      <section id="cocktail-view">
+        <Container>
+          <div className="cocktail-details py-3 py-lg-5">
+            {this.state.cocktailDetails &&
+              <Row>
+                <Col sm={{ span: 12 }} md={{ span: 6, order: 2 }} lg={5} xl={4}>
+                  <Figure>
+                    <Figure.Image
+                      src={imageURL}
+                      alt={`Photo of a ${name} cocktail`}
+                      title={name}
+                    />
 
-                  {tags &&
-                    <Figure.Caption>
-                      {tags}
-                      {/* {tags ? tags.split(",").map((tag, index) => <a href="#" key={index}>{tag}</a>) : ""} */}
-                    </Figure.Caption>
-                  }
-                </Figure>
+                    {tags &&
+                      <Figure.Caption>
+                        {tags}
+                      </Figure.Caption>
+                    }
+                  </Figure>
 
-                <div className="mb-4 mb-md-0">
-                  <SelectButton
-                    thisCocktail={thisCocktail}
-                    myCocktails={myCocktails}
-                    selectCocktail={selectCocktail}
-                  />
-                </div>
-              </Col>
+                  <div className="mb-4 mb-md-0">
+                    <SelectButton
+                      thisCocktail={thisCocktail}
+                      myCocktails={myCocktails}
+                      selectCocktail={selectCocktail}
+                    />
+                  </div>
+                </Col>
 
-              <Col sm={{ span: 12 }} md={{ span: 6, order: 1 }} lg={7} xl={8}>
-                <div>
-                  <h2>{name}</h2>
-                  <p>{instructions}</p>
-                </div>
+                <Col sm={{ span: 12 }} md={{ span: 6, order: 1 }} lg={7} xl={8}>
+                  <div>
+                    <h2>{name}</h2>
+                    <p>{instructions}</p>
+                  </div>
 
-                <div className="ingredient-list">
-                  <h3>Ingredients:</h3>
-                  {ingredients &&
-                    <ul>
-                      {ingredients.map((ingredient, index) => <li className="ingredient" key={index}>{ingredient.name + " " + (ingredient.quantity ? ingredient.quantity : "")}</li>)}
+                  <div className="ingredient-list">
+                    <h3>Ingredients:</h3>
+                    {ingredients &&
+                      <ul>
+                        {ingredients.map((ingredient, index) => <li className="ingredient" key={index}>{ingredient.name + " " + (ingredient.quantity ? ingredient.quantity : "")}</li>)}
+                      </ul>
+                    }
+                  </div>
+
+                  <div>
+                    <h4>Details:</h4>
+                    <ul className="m-md-0">
+                      <li>{category}</li>
+                      <li>{alcoholic}</li>
+                      <li>Glass type : {glass}</li>
                     </ul>
-                  }
-                </div>
-
-                <div>
-                  <h4>Details:</h4>
-                  <ul className="m-md-0">
-                    <li>{category}</li>
-                    <li>{alcoholic}</li>
-                    <li>Glass type : {glass}</li>
-                    <li><FaGlassMartiniAlt /> : {glass}</li>
-                  </ul>
-                </div>
-              </Col>
-            </Row>
-          }
-        </div>
-      </Container>
+                  </div>
+                </Col>
+              </Row>
+            }
+          </div>
+        </Container>
+      </section>
     );
   }
 }

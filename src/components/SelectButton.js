@@ -5,6 +5,22 @@ import Button from 'react-bootstrap/Button';
 import { MdLibraryAdd } from 'react-icons/md';
 import { MdDeleteForever } from 'react-icons/md';
 
+
+const RemoveButton = (props) => {
+  return (
+    <Button variant="dark" onClick={props.onClick}>
+      <MdDeleteForever /> Remove
+    </Button>
+  )
+}
+const AddButton = (props) => {
+  return (
+    <Button variant="success" onClick={props.onClick}>
+      <MdLibraryAdd /> Add to My Cocktails
+    </Button >
+  )
+}
+
 export default class SelectButton extends React.Component {
   constructor(props){
     super(props)
@@ -18,21 +34,20 @@ export default class SelectButton extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.myCocktails !== prevProps.myCocktails || this.props.thisCocktail !== prevProps.thisCocktail) {
+    if (
+      this.props.myCocktails !== prevProps.myCocktails 
+      || this.props.thisCocktail !== prevProps.thisCocktail
+    ) {
       this.isSelected()
     }
   }
 
   isSelected() {
     const { thisCocktail, myCocktails } = this.props
-
-    for (const myCocktail of myCocktails) {
-      if (thisCocktail.id === myCocktail.id) {
-        return this.setState({ isSelected: true })
-      }
-    }
-
-    return this.setState({ isSelected: false })
+    
+    myCocktails.some(myCocktail => myCocktail.id === thisCocktail.id)
+      ? this.setState({ isSelected: true }) 
+      : this.setState({ isSelected: false })
   }
 
   handleSelectCocktail() {
@@ -40,40 +55,14 @@ export default class SelectButton extends React.Component {
     selectCocktail(thisCocktail)
   }
 
-  // selectButton() {
-  //   const isSelected = this.state.isSelected
-
-  //   if (isSelected) {
-      
-  //     return (
-  //       <Button variant="dark" onClick={this.handleSelectCocktail}>
-  //         <MdDeleteForever /> Remove
-  //       </Button>
-  //     )
-  //   }
-    
-  //   return (
-  //     <Button variant="success" onClick={this.handleSelectCocktail}>
-  //       <MdLibraryAdd /> Add to My Cocktails
-  //     </Button >
-  //   )
-  // }
-
   render() {
-    const isSelected = this.state.isSelected
-
-    if (isSelected) {
-      return (
-        <Button variant="dark" onClick={this.handleSelectCocktail}>
-          <MdDeleteForever /> Remove
-        </Button>
-      )
-    }
-
     return (
-      <Button variant="success" onClick={this.handleSelectCocktail}>
-        <MdLibraryAdd /> Add to My Cocktails
-      </Button >
+      <>
+        {this.state.isSelected
+          ? <RemoveButton onClick={this.handleSelectCocktail} />
+          : <AddButton onClick={this.handleSelectCocktail} />
+        }
+      </>
     )
   }
 }
