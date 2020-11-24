@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './components/Header';
 import SearchPage from './components/SearchPage';
+import ConfirmationModal from './components/Modal'
 import MyCocktails from './components/MyCocktails';
 import CocktailView from './components/CocktailView';
 import {
@@ -17,44 +18,23 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      myCocktails: [
-        {
-          id: "11000",
-          name: "Mojito",
-          previewURL: "https://www.thecocktaildb.com/images/media/drink/3z6xdi1589574603.jpg/preview"
-        },
-        {
-          id: "15841",
-          name: "Mojito #3",
-          previewURL: "https://www.thecocktaildb.com/images/media/drink/vwxrsw1478251483.jpg/preview"
-        }
-      ]
+      myCocktails: [],
+      showModal: false,
+      cocktailToRemove: ""
     }
 
     this.selectCocktail = this.selectCocktail.bind(this)
+    this.removeCocktail = this.removeCocktail.bind(this)
   }
 
   selectCocktail(cocktail) {
-    const myCocktails = [...this.state.myCocktails]
+    const myCocktails = this.state.myCocktails
 
-    // if (myCocktails.indexOf(cocktail) === -1) {
-    //   console.log(`cocktail ${cocktail.name} non trouvé`)
-    //   myCocktails.splice(myCocktails.indexOf(cocktail), 0, cocktail)
-    //   // this.setState({ myCocktails: [...myCocktails, cocktail] })
-    // } else {
-    //   console.log(`cocktail ${cocktail.name} trouvé`)
-    //   myCocktails.splice(myCocktails.indexOf(cocktail), 1)
-    //   // this.setState({ myCocktails: myCocktails })
-    // }
-
-    // this.setState({ myCocktails: myCocktails })
-    
-
-    // Si le cocktail sélectionné est déjà dans ma liste "myCocktails", on le supprime de la liste
+    // Si le cocktail sélectionné est déjà dans ma liste "myCocktails"
     for (let index = 0; index < myCocktails.length; index++) {
       if (cocktail.id === myCocktails[index].id) {
-        myCocktails.splice(index, 1)
-        return this.setState({ myCocktails: myCocktails })
+        // on affiche le modal de confirmation de suppression du cocktail
+        return this.setState({ showModal: true, cocktailToRemove: {...cocktail, index} })
       }
     }
 
@@ -62,11 +42,27 @@ class App extends React.Component {
     return this.setState({ myCocktails: [...myCocktails, cocktail] })
   }
 
+  removeCocktail() {
+    const cocktailToRemove = this.state.cocktailToRemove
+    const myCocktails = [...this.state.myCocktails]
+
+    // Si l'utilisateur à validé le modal de confirmation, on supprime le cocktail de la liste
+    myCocktails.splice(cocktailToRemove.index, 1)
+    return this.setState({ myCocktails: myCocktails, showModal: false, cocktailToRemove: "" })
+  }
+
   render() {
     const myCocktails = this.state.myCocktails
 
     return (
       <div className="App py-3 py-md-5">
+        <ConfirmationModal
+          show={this.state.showModal}
+          onConfirm={this.removeCocktail}
+          onClose={() => this.setState({ showModal: false, cocktailToRemove: "" })}
+          thisCocktailName={this.state.cocktailToRemove.name}
+        />
+
         <Router>
           <Header myCocktails={myCocktails}/>
 
