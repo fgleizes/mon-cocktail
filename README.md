@@ -12,6 +12,22 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
+
+### `npm run build-pages`
+
+This builds the static website in the `docs/` folder. In order to deploy to github-pages:
+
+```
+git checkout master
+git pull
+npm run build-pages
+git add docs/
+git push
+```
+
+*Note*: we are serving the website from a relative path ([see documentation](https://create-react-app.dev/docs/deployment/#serving-the-same-build-from-different-paths)). This has limitations regarding react-router `history.pushState()`.
+
+
 ### `yarn test`
 
 Launches the test runner in the interactive watch mode.<br />
