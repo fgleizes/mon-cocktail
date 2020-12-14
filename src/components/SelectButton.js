@@ -21,48 +21,27 @@ const AddButton = (props) => {
   )
 }
 
-export default class SelectButton extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = { isSelected: false }
+const addAnimation = () => {
+  document.querySelector(".myCocktails-cart.nav-link").className = "myCocktails-cart nav-link";
 
-    this.handleSelectCocktail = this.handleSelectCocktail.bind(this)
-  }
+  window.requestAnimationFrame(function () {
+    window.requestAnimationFrame(function () {
+      document.querySelector(".myCocktails-cart").className = "myCocktails-cart nav-link cocktail-added";
+    });
+  });
+}
 
-  componentDidMount() {
-    this.isSelected()
-  }
+export default function SelectButton(props) {
+  const { thisCocktail, myCocktails, selectCocktail } = props
 
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.myCocktails !== prevProps.myCocktails 
-      || this.props.thisCocktail !== prevProps.thisCocktail
-    ) {
-      this.isSelected()
-    }
-  }
-
-  isSelected() {
-    const { thisCocktail, myCocktails } = this.props
-    
-    myCocktails.some(myCocktail => myCocktail.id === thisCocktail.id)
-      ? this.setState({ isSelected: true }) 
-      : this.setState({ isSelected: false })
-  }
-
-  handleSelectCocktail() {
-    const { selectCocktail, thisCocktail } = this.props
+  const onClickAddButton = () => {
     selectCocktail(thisCocktail)
+    addAnimation()
   }
 
-  render() {
-    return (
-      <>
-        {this.state.isSelected
-          ? <RemoveButton onClick={this.handleSelectCocktail} />
-          : <AddButton onClick={this.handleSelectCocktail} />
-        }
-      </>
-    )
-  }
+  return (
+    myCocktails.some(myCocktail => myCocktail.id === thisCocktail.id)
+      ? <RemoveButton onClick={() => selectCocktail(thisCocktail)} />
+      : <AddButton onClick={onClickAddButton} />
+  )
 }

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-// import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import { MdLibraryBooks } from 'react-icons/md';
 
@@ -17,21 +16,15 @@ export default function Header(props) {
         <Navbar.Brand as={Link} to="/">Cocktailon</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
-          <Nav className="mr-auto">
+          <Nav className="nav-left mr-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
-            {/* <NavDropdown title="Search by" id="nav-dropdown">
-              <NavDropdown.Item href="./">Name</NavDropdown.Item>
-              <NavDropdown.Item href="./">Main ingredient</NavDropdown.Item>
-              <NavDropdown.Item href="./">Category</NavDropdown.Item>
-              <NavDropdown.Item href="./">Glass</NavDropdown.Item>
-              <NavDropdown.Item href="./">Soft or hard drinks</NavDropdown.Item>
-            </NavDropdown> */}
           </Nav>
-          <Nav>
+
+          <Nav className='nav-right'>
             <Nav.Link as={Link} to='/myCocktails/' className="myCocktails-cart d-flex align-items-center">
               My Cocktails<MdLibraryBooks className="ml-2" /> 
               {myCocktails.length > 0 && 
-                <span className="ml-md-2">{myCocktails.length}</span>
+                <span className="ml-md-2 d-flex align-items-center justify-content-center">{myCocktails.length}</span>
               }
             </Nav.Link>
           </Nav>
