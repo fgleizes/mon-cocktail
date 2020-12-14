@@ -7,6 +7,44 @@ body {
   background-color: goldenrod;
 }
 
+/* HEADER */
+.navbar .navbar-brand {
+  font-size: 1.75rem;
+}
+.navbar .myCocktails-cart {
+  position: relative;
+}
+.navbar .myCocktails-cart.cocktail-added {
+  animation: addAnimation 0.12s ease-out 4 alternate;
+}
+.navbar .myCocktails-cart svg {
+  font-size: 1.5rem;
+}
+.navbar .myCocktails-cart span {
+  position: absolute;
+  bottom: 0px;
+  left: 122px;
+  width: 18px;
+  height: 18px;
+  font-size: 11px;
+  font-weight: 900;
+  border-radius: 100%;
+  background-color: rgba(255,255,255, .5);
+  color: #343a40
+}
+.navbar .myCocktails-cart:hover span {
+  background-color: rgba(255,255,255, .75);
+}
+
+@keyframes addAnimation {
+  from {
+    transform: scale(1) translateY(0);
+  }
+  to {
+    transform: scale(1.03) translateY(-2px);
+  }
+}
+
 /* DISPLAY COCKTAIL LIST */
 .cocktail-list {
   display: grid;
