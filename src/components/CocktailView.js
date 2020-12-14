@@ -75,7 +75,11 @@ class CocktailView extends React.Component {
                     <h3>Ingredients:</h3>
                     {ingredients &&
                       <ul>
-                        {ingredients.map((ingredient, index) => <li className="ingredient" key={index}>{ingredient.name + " " + (ingredient.quantity ? ingredient.quantity : "")}</li>)}
+                        {ingredients.map((ingredient, index) =>
+                          <li className="ingredient" key={index}>
+                            {ingredient.name + (ingredient.quantity && " " + ingredient.quantity)}
+                          </li>
+                        )}
                       </ul>
                     }
                   </div>

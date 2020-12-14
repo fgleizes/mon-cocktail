@@ -13,9 +13,9 @@ export default function DisplayCocktailList(props) {
         <h2 className="text-dark">Cocktails :</h2>
 
         <div className="cocktail-list pt-3">  
-          {cocktails.map((cocktail, index) => (
+          {cocktails.map((cocktail) => (
             <CocktailCard
-              key={index}
+              key={cocktail.id}
               cocktail={cocktail}
               myCocktails={myCocktails}
               selectCocktail={selectCocktail}

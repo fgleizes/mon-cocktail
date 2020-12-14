@@ -15,9 +15,9 @@ export default function MyCocktails(props) {
         {myCocktails.length > 0 &&
           <div id="cocktail-list pb-5">
             <div className="cocktail-list pt-3">  
-              {myCocktails.map((myCocktail, index) => (
+              {myCocktails.map((myCocktail) => (
                 <CocktailCard
-                  key={index}
+                  key={myCocktail.id}
                   cocktail={myCocktail}
                   myCocktails={myCocktails}
                   selectCocktail={selectCocktail}

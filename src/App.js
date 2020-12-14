@@ -56,7 +56,7 @@ class App extends React.Component {
         />
 
         <Router>
-          <Header myCocktails={myCocktails}/>
+          <Header myCocktails={myCocktails} />
 
           <Switch>
             {/*** Route to my Cocktail ***/}
@@ -65,7 +65,6 @@ class App extends React.Component {
             </Route>
 
             {/*** Route to search page ***/}
-            {/* <Route path="/search/:query?" component={SearchPage} /> */}
             <Route path="/search/:query?" render={(props) => <SearchPage {...props} myCocktails={myCocktails} selectCocktail={this.selectCocktail} />} />
 
             {/*** Route to cocktail view (=> cocktail details) ***/}
